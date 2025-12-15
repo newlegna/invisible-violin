@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invisible Air Violin</title>
+    <title>Invisible Air Violin - Height Control (G Major)</title>
     <!-- MediaPipe Dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
@@ -41,7 +41,6 @@
 
         video {
             display: none;
-            /* Hide the raw video feed, we draw on canvas */
         }
 
         canvas {
@@ -52,7 +51,6 @@
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             transform: scaleX(-1);
-            /* Mirror effect for natural feel */
         }
 
         #ui-layer {
@@ -60,23 +58,33 @@
             top: 20px;
             left: 20px;
             z-index: 10;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 15px;
-            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 12px;
             pointer-events: none;
+            border-left: 4px solid #d4a017;
+            width: 300px;
         }
 
         h1 {
-            margin: 0 0 5px 0;
-            font-size: 1.5rem;
+            margin: 0 0 10px 0;
+            font-size: 1.8rem;
             color: #d4a017;
-            /* Gold color */
         }
 
         p {
             margin: 5px 0;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #ccc;
+        }
+
+        .instruction-group {
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            color: #fff;
+            font-weight: bold;
         }
 
         #controls {
@@ -90,7 +98,7 @@
             background: #d4a017;
             color: #1e1e1e;
             border: none;
-            padding: 12px 24px;
+            padding: 12px 28px;
             font-size: 1.2rem;
             font-weight: bold;
             border-radius: 50px;
@@ -134,41 +142,14 @@
             color: white;
         }
 
-        #note-display {
-            font-size: 1.2rem;
+        #string-indicator {
+            font-size: 2rem;
             font-weight: bold;
             color: #d4a017;
-            margin-top: 5px;
-        }
-
-        #string-display {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-top: 8px;
-            padding: 6px 12px;
-            border-radius: 6px;
-            display: inline-block;
-            transition: all 0.2s ease;
-        }
-
-        .string-g {
-            background: linear-gradient(135deg, #8B4513, #A0522D);
-            color: white;
-        }
-
-        .string-d {
-            background: linear-gradient(135deg, #2E7D32, #4CAF50);
-            color: white;
-        }
-
-        .string-a {
-            background: linear-gradient(135deg, #1565C0, #2196F3);
-            color: white;
-        }
-
-        .string-e {
-            background: linear-gradient(135deg, #7B1FA2, #9C27B0);
-            color: white;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
         }
 
         #loading {
@@ -180,126 +161,40 @@
             display: block;
             z-index: 5;
         }
-
-        /* String indicator on right side */
-        #string-indicator {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .string-zone {
-            width: 60px;
-            height: 50px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            opacity: 0.4;
-            transition: all 0.15s ease;
-            border: 2px solid transparent;
-        }
-
-        .string-zone.active {
-            opacity: 1;
-            transform: scale(1.1);
-            border-color: white;
-            box-shadow: 0 0 20px currentColor;
-        }
-
-        .zone-e {
-            background: linear-gradient(135deg, #7B1FA2, #9C27B0);
-            color: white;
-        }
-
-        .zone-a {
-            background: linear-gradient(135deg, #1565C0, #2196F3);
-            color: white;
-        }
-
-        .zone-d {
-            background: linear-gradient(135deg, #2E7D32, #4CAF50);
-            color: white;
-        }
-
-        .zone-g {
-            background: linear-gradient(135deg, #8B4513, #A0522D);
-            color: white;
-        }
-
-        /* Bow angle indicator */
-        #angle-indicator {
-            position: absolute;
-            right: 100px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 30px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            z-index: 10;
-            overflow: hidden;
-        }
-
-        #angle-marker {
-            position: absolute;
-            left: 5px;
-            width: 20px;
-            height: 20px;
-            background: #d4a017;
-            border-radius: 50%;
-            transition: top 0.1s ease;
-            box-shadow: 0 0 10px #d4a017;
-        }
     </style>
 </head>
 
 <body>
 
     <div id="container">
-        <div id="loading">Loading Computer Vision Model...</div>
+        <div id="loading">Loading Violin Model...</div>
         <canvas id="output_canvas"></canvas>
         <video id="input_video"></video>
 
         <div id="ui-layer">
-            <h1>🎻 Invisible Violin</h1>
-            <p><strong>Right Hand:</strong> Bend fingers to play notes</p>
-            <ul style="margin: 5px 0 5px 20px; padding: 0; font-size: 0.85rem; color: #aaa;">
-                <li>Index: 1st position</li>
-                <li>Middle: 2nd position</li>
-                <li>Ring: 3rd position</li>
-                <li>Pinky: 4th position</li>
-            </ul>
-            <p><strong>Left Hand:</strong> Tilt to select string, move sideways to bow</p>
-            <p style="font-size: 0.8rem; color: #888;">↓ Tilt down = E string | ↑ Tilt up = G string</p>
+            <h1>Invisible Violin</h1>
+
+            <div class="instruction-group">
+                <p class="highlight">Left Hand (Bow):</p>
+                <p>• <strong>High Arm</strong> = E String</p>
+                <p>• <strong>Low Arm</strong> = G String</p>
+                <p>• Move <span style="color: #4da6ff">Side-to-Side</span> to Play</p>
+            </div>
+
+            <div class="instruction-group">
+                <p class="highlight">Right Hand (Fretboard):</p>
+                <p>• Bend fingers to add notes</p>
+            </div>
+
             <div id="status-display">
                 <span class="status-badge status-inactive" id="audio-status">Audio Off</span>
                 <span class="status-badge status-inactive" id="track-status">No Hands</span>
             </div>
-            <p style="margin-top: 10px;">
-                String: <span id="string-display" class="string-g">G</span>
+
+            <div id="string-indicator">String: --</div>
+
+            <p style="font-size: 0.8em; color: #888; margin-top: 15px;">Active Notes: <span id="note-display">--</span>
             </p>
-            <p style="font-size: 0.8em; color: #aaa;">Note: <span id="note-display">--</span></p>
-        </div>
-
-        <!-- String selection indicator -->
-        <div id="string-indicator">
-            <div class="string-zone zone-e" data-string="E">E</div>
-            <div class="string-zone zone-a" data-string="A">A</div>
-            <div class="string-zone zone-d" data-string="D">D</div>
-            <div class="string-zone zone-g" data-string="G">G</div>
-        </div>
-
-        <!-- Bow angle indicator -->
-        <div id="angle-indicator">
-            <div id="angle-marker"></div>
         </div>
 
         <div id="controls">
@@ -317,214 +212,148 @@
                 this.lfo = null;
                 this.lfoGain = null;
                 this.isInit = false;
-                this.currentString = 'G';
 
-                // All 4 violin strings with their notes (open + 3 finger positions)
-                // Using equal temperament tuning
-                this.strings = {
+                this.currentString = 'E'; // Default
+
+                // G Major Scale (Standard First Position)
+                this.stringMap = {
                     'G': {
-                        color: '#A0522D',
-                        notes: {
-                            'Open': 196.00,   // G3
-                            '1st': 220.00,    // A3
-                            '2nd': 246.94,    // B3
-                            '3rd': 261.63     // C4
-                        }
+                        base: 196.00,
+                        notes: [220.00, 246.94, 261.63, 293.66],
+                        labels: ['A3', 'B3', 'C4', 'D4']
                     },
                     'D': {
-                        color: '#4CAF50',
-                        notes: {
-                            'Open': 293.66,   // D4
-                            '1st': 329.63,    // E4
-                            '2nd': 369.99,    // F#4
-                            '3rd': 392.00     // G4
-                        }
+                        base: 293.66,
+                        notes: [329.63, 369.99, 392.00, 440.00],
+                        labels: ['E4', 'F#4', 'G4', 'A4']
                     },
                     'A': {
-                        color: '#2196F3',
-                        notes: {
-                            'Open': 440.00,   // A4
-                            '1st': 493.88,    // B4
-                            '2nd': 554.37,    // C#5
-                            '3rd': 587.33     // D5
-                        }
+                        base: 440.00,
+                        notes: [493.88, 554.37, 587.33, 659.25],
+                        labels: ['B4', 'C#5', 'D5', 'E5']
                     },
                     'E': {
-                        color: '#9C27B0',
-                        notes: {
-                            'Open': 659.25,   // E5
-                            '1st': 739.99,    // F#5
-                            '2nd': 830.61,    // G#5
-                            '3rd': 880.00     // A5
-                        }
+                        base: 659.25,
+                        notes: [739.99, 830.61, 880.00, 987.77],
+                        labels: ['F#5', 'G#5', 'A5', 'B5']
                     }
                 };
 
-                this.voices = {}; // Stores oscillators for each string/note combination
+                this.voices = [];
             }
 
             init() {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
                 this.ctx = new AudioContext();
 
-                // Master Gain (Controlled by Bow)
                 this.masterGain = this.ctx.createGain();
                 this.masterGain.gain.value = 0;
                 this.masterGain.connect(this.ctx.destination);
 
-                // Filter (Common Lowpass) - slightly different per string for realism
                 this.filterNode = this.ctx.createBiquadFilter();
                 this.filterNode.type = "lowpass";
                 this.filterNode.frequency.value = 2500;
-                this.filterNode.Q.value = 1;
                 this.filterNode.connect(this.masterGain);
 
-                // Vibrato LFO (Common to all voices)
                 this.lfo = this.ctx.createOscillator();
-                this.lfo.frequency.value = 5.5;
+                this.lfo.frequency.value = 6.0;
                 this.lfoGain = this.ctx.createGain();
-                this.lfoGain.gain.value = 4.0;
+                this.lfoGain.gain.value = 6.0;
                 this.lfo.connect(this.lfoGain);
                 this.lfo.start();
 
-                // Initialize voices for ALL strings and notes
-                for (const [stringName, stringData] of Object.entries(this.strings)) {
-                    this.voices[stringName] = {};
+                // 4 Voices for fingers
+                for (let i = 0; i < 4; i++) {
+                    const voice = {
+                        osc: this.ctx.createOscillator(),
+                        gain: this.ctx.createGain()
+                    };
 
-                    for (const [noteName, freq] of Object.entries(stringData.notes)) {
-                        const voice = {};
+                    voice.osc.type = 'sawtooth';
+                    voice.gain.gain.value = 0;
 
-                        // Voice Gain (Gate controlled by Finger)
-                        voice.gain = this.ctx.createGain();
-                        voice.gain.gain.value = 0;
-                        voice.gain.connect(this.filterNode);
+                    this.lfoGain.connect(voice.osc.frequency);
+                    voice.osc.connect(voice.gain);
+                    voice.gain.connect(this.filterNode);
+                    voice.osc.start();
 
-                        // Main Oscillator (sawtooth for violin-like harmonics)
-                        voice.osc = this.ctx.createOscillator();
-                        voice.osc.type = 'sawtooth';
-                        voice.osc.frequency.value = freq;
-
-                        // Second oscillator for richer sound (slightly detuned)
-                        voice.osc2 = this.ctx.createOscillator();
-                        voice.osc2.type = 'triangle';
-                        voice.osc2.frequency.value = freq * 1.002; // Slight detune
-
-                        // Mix the oscillators
-                        const oscMix = this.ctx.createGain();
-                        oscMix.gain.value = 0.7;
-                        voice.osc.connect(oscMix);
-
-                        const osc2Mix = this.ctx.createGain();
-                        osc2Mix.gain.value = 0.3;
-                        voice.osc2.connect(osc2Mix);
-
-                        oscMix.connect(voice.gain);
-                        osc2Mix.connect(voice.gain);
-
-                        // Apply vibrato to both oscillators
-                        this.lfoGain.connect(voice.osc.frequency);
-                        this.lfoGain.connect(voice.osc2.frequency);
-
-                        voice.osc.start();
-                        voice.osc2.start();
-
-                        this.voices[stringName][noteName] = voice;
-                    }
+                    this.voices.push(voice);
                 }
+
+                // Open String Voice
+                this.openStringVoice = {
+                    osc: this.ctx.createOscillator(),
+                    gain: this.ctx.createGain()
+                };
+                this.openStringVoice.osc.type = 'sawtooth';
+                this.openStringVoice.gain.gain.value = 0;
+                this.lfoGain.connect(this.openStringVoice.osc.frequency);
+                this.openStringVoice.osc.connect(this.openStringVoice.gain);
+                this.openStringVoice.gain.connect(this.filterNode);
+                this.openStringVoice.osc.start();
 
                 this.isInit = true;
 
                 document.getElementById('audio-status').textContent = "Audio Active";
                 document.getElementById('audio-status').className = "status-badge status-active";
+
+                // Set initial frequencies
+                this.setString(this.currentString, true);
             }
 
-            setString(stringName) {
-                if (!this.strings[stringName]) return;
+            setString(stringName, force = false) {
+                if (!this.isInit) return;
+                if (!force && this.currentString === stringName) return;
 
-                const previousString = this.currentString;
                 this.currentString = stringName;
 
-                // Update filter frequency based on string (lower strings = lower cutoff)
-                const filterFreqs = { 'G': 1800, 'D': 2200, 'A': 2800, 'E': 3500 };
-                if (this.filterNode) {
-                    this.filterNode.frequency.setTargetAtTime(filterFreqs[stringName], this.ctx.currentTime, 0.05);
+                const data = this.stringMap[stringName];
+                const now = this.ctx.currentTime;
+                const slideTime = 0.05;
+
+                // Open string
+                this.openStringVoice.osc.frequency.setTargetAtTime(data.base, now, slideTime);
+
+                // Fingers
+                for (let i = 0; i < 4; i++) {
+                    this.voices[i].osc.frequency.setTargetAtTime(data.notes[i], now, slideTime);
                 }
-
-                // Fade out previous string notes (smooth transition)
-                if (previousString !== stringName && this.voices[previousString]) {
-                    const now = this.ctx.currentTime;
-                    for (const voice of Object.values(this.voices[previousString])) {
-                        voice.gain.gain.setTargetAtTime(0, now, 0.02);
-                    }
-                }
-
-                // Update UI
-                const displayEl = document.getElementById('string-display');
-                displayEl.textContent = stringName;
-                displayEl.className = `string-${stringName.toLowerCase()}`;
-
-                // Update string indicator
-                document.querySelectorAll('.string-zone').forEach(zone => {
-                    zone.classList.toggle('active', zone.dataset.string === stringName);
-                });
             }
 
-            updateActiveNotes(fingerPositions) {
+            updateFingers(bentFingers) {
                 if (!this.isInit) return;
-
                 const now = this.ctx.currentTime;
-                const currentStringVoices = this.voices[this.currentString];
-                const noteNames = ['Open', '1st', '2nd', '3rd'];
-                const noteDisplayNames = [];
 
-                // Map finger positions to notes on current string
-                // fingerPositions is an array like [false, true, false, true] for which fingers are bent
+                let anyFingerBent = false;
+                const activeLabels = [];
+                const data = this.stringMap[this.currentString];
 
-                // Determine highest bent finger (like real violin fingering)
-                let highestPosition = -1;
-                fingerPositions.forEach((isBent, index) => {
-                    if (isBent) highestPosition = index;
-                });
-
-                // Play the note at the highest pressed position (or open string)
-                const activeNoteName = highestPosition >= 0 ? noteNames[highestPosition + 1] : 'Open';
-
-                for (const [noteName, voice] of Object.entries(currentStringVoices)) {
-                    if (noteName === activeNoteName) {
-                        voice.gain.gain.setTargetAtTime(1.0, now, 0.02);
-                        noteDisplayNames.push(`${this.currentString}-${noteName}`);
+                for (let i = 0; i < 4; i++) {
+                    if (bentFingers[i]) {
+                        this.voices[i].gain.gain.setTargetAtTime(1.0, now, 0.02);
+                        anyFingerBent = true;
+                        activeLabels.push(data.labels[i]);
                     } else {
-                        voice.gain.gain.setTargetAtTime(0, now, 0.02);
+                        this.voices[i].gain.gain.setTargetAtTime(0, now, 0.02);
                     }
                 }
 
-                // Also fade out notes from other strings
-                for (const [stringName, stringVoices] of Object.entries(this.voices)) {
-                    if (stringName !== this.currentString) {
-                        for (const voice of Object.values(stringVoices)) {
-                            voice.gain.gain.setTargetAtTime(0, now, 0.015);
-                        }
-                    }
+                if (!anyFingerBent) {
+                    this.openStringVoice.gain.gain.setTargetAtTime(1.0, now, 0.02);
+                    activeLabels.push(this.currentString + " (Open)");
+                } else {
+                    this.openStringVoice.gain.gain.setTargetAtTime(0, now, 0.02);
                 }
 
-                // Update UI text
-                const freqInfo = this.strings[this.currentString].notes[activeNoteName];
-                const text = noteDisplayNames.length > 0 ?
-                    `${noteDisplayNames[0]} (${Math.round(freqInfo)}Hz)` : '--';
-                document.getElementById('note-display').innerText = text;
-
-                return activeNoteName;
+                document.getElementById('note-display').innerText = activeLabels.join(', ');
             }
 
             bow(velocity) {
                 if (!this.isInit) return;
-
-                // Gain mapping for Master Volume
-                const sensitivity = 12.0;
+                const sensitivity = 10.0;
                 let targetGain = velocity * sensitivity;
-                if (targetGain > 0.85) targetGain = 0.85;
-
-                this.masterGain.gain.setTargetAtTime(targetGain, this.ctx.currentTime, 0.08);
+                if (targetGain > 0.8) targetGain = 0.8;
+                this.masterGain.gain.setTargetAtTime(targetGain, this.ctx.currentTime, 0.05);
             }
 
             stop() {
@@ -542,11 +371,11 @@
         const canvasCtx = canvasElement.getContext('2d');
         const startBtn = document.getElementById('start-btn');
         const loadingDiv = document.getElementById('loading');
-        const angleMarker = document.getElementById('angle-marker');
+        const stringIndicator = document.getElementById('string-indicator');
 
-        let previousLeftHandX = null;
+        let previousBowX = null;
         let lastTime = 0;
-        let smoothedBowAngle = 0.5; // 0 = tilted down (G), 1 = tilted up (E)
+        let activeStringId = 'E';
 
         startBtn.addEventListener('click', () => {
             if (!violin.isInit) {
@@ -556,82 +385,29 @@
             }
         });
 
-        // Helper: Check if a finger is extended based on landmarks
-        function isFingerExtended(landmarks, tipIdx, pipIdx) {
-            const wrist = landmarks[0];
-            const tip = landmarks[tipIdx];
-            const pip = landmarks[pipIdx];
-
-            const distTip = Math.hypot(tip.x - wrist.x, tip.y - wrist.y);
-            const distPip = Math.hypot(pip.x - wrist.x, pip.y - wrist.y);
-
-            return distTip > distPip;
-        }
-
-        // Helper: Check if a finger is bent (tip closer to wrist than PIP)
         function isFingerBent(landmarks, tipIdx, pipIdx) {
             const wrist = landmarks[0];
             const tip = landmarks[tipIdx];
             const pip = landmarks[pipIdx];
-
-            const distTip = Math.hypot(tip.x - wrist.x, tip.y - wrist.y);
-            const distPip = Math.hypot(pip.x - wrist.x, pip.y - wrist.y);
-
-            return distTip < distPip;
+            return Math.hypot(tip.x - wrist.x, tip.y - wrist.y) < Math.hypot(pip.x - wrist.x, pip.y - wrist.y);
         }
-
-        // Calculate bow angle from left hand orientation
-        // Uses wrist to middle finger MCP angle
-        function getBowAngle(landmarks) {
-            const wrist = landmarks[0];
-            const middleMcp = landmarks[9]; // Middle finger MCP
-            const indexMcp = landmarks[5];
-
-            // Calculate angle based on vertical difference between wrist and finger base
-            // Positive = tilted up, Negative = tilted down
-            const dy = wrist.y - middleMcp.y;
-            const dx = middleMcp.x - wrist.x;
-
-            // Normalize to 0-1 range (0 = G string/tilted down, 1 = E string/tilted up)
-            // Using y difference primarily - when wrist is below knuckles, tilted up
-            let angle = 0.5 + (dy * 2.5); // Multiply for sensitivity
-
-            // Also factor in the hand rotation
-            const handRotation = Math.atan2(indexMcp.y - wrist.y, indexMcp.x - wrist.x);
-            angle += (handRotation + Math.PI / 2) * 0.3;
-
-            return Math.max(0, Math.min(1, angle));
-        }
-
-        // Map angle to string
-        function angleToString(angle) {
-            if (angle > 0.75) return 'G';
-            if (angle > 0.5) return 'D';
-            if (angle > 0.25) return 'A';
-            return 'E';
-        }
-
-        // String colors for visualization
-        const stringColors = {
-            'G': '#A0522D',
-            'D': '#4CAF50',
-            'A': '#2196F3',
-            'E': '#9C27B0'
-        };
 
         // --- 3. MediaPipe Setup ---
         function onResults(results) {
             loadingDiv.style.display = 'none';
-
             canvasElement.width = videoElement.videoWidth;
             canvasElement.height = videoElement.videoHeight;
 
             canvasCtx.save();
             canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-            canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
 
-            let leftHand = null;
-            let rightHand = null;
+            // Draw dimmed video
+            canvasCtx.globalAlpha = 0.5;
+            canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+            canvasCtx.globalAlpha = 1.0;
+
+            let leftHand = null;  // Bow (Left Handed)
+            let rightHand = null; // Fretboard (Left Handed)
 
             if (results.multiHandLandmarks && results.multiHandedness) {
                 document.getElementById('track-status').textContent = "Tracking";
@@ -641,11 +417,6 @@
                     const landmarks = results.multiHandLandmarks[i];
                     const classification = results.multiHandedness[i];
                     const label = classification.label;
-
-                    // Draw basic skeleton
-                    drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, { color: '#00FF00', lineWidth: 2 });
-                    drawLandmarks(canvasCtx, landmarks, { color: '#FF0000', lineWidth: 1, radius: 3 });
-
                     if (label === 'Left') leftHand = landmarks;
                     if (label === 'Right') rightHand = landmarks;
                 }
@@ -659,119 +430,135 @@
             const deltaTime = (currentTime - lastTime) / 1000;
             lastTime = currentTime;
 
-            // --- 4. Game Logic ---
+            // --- 4. String Selection Logic (HEIGHT BASED REVERT) ---
 
-            // BOWING & STRING SELECTION (LEFT Hand)
+            const strings = [
+                { id: 'E', color: '#FF4D4D' },
+                { id: 'A', color: '#4DA6FF' },
+                { id: 'D', color: '#D4A017' },
+                { id: 'G', color: '#C0C0C0' }
+            ];
+
             if (leftHand) {
-                // Calculate bow angle and select string
-                const rawAngle = getBowAngle(leftHand);
+                const wristY = leftHand[0].y; // 0 is top, 1 is bottom
+                const buffer = 0.05; // Hysteresis buffer
 
-                // Smooth the angle to prevent jitter
-                smoothedBowAngle = smoothedBowAngle * 0.7 + rawAngle * 0.3;
+                // E (Top) -> G (Bottom) Logic
+                // E | 0.35 | A | 0.52 | D | 0.68 | G
 
-                const selectedString = angleToString(smoothedBowAngle);
-                violin.setString(selectedString);
+                if (activeStringId === 'E') {
+                    if (wristY > 0.35 + buffer) activeStringId = 'A';
+                }
+                else if (activeStringId === 'A') {
+                    if (wristY < 0.35 - buffer) activeStringId = 'E';
+                    else if (wristY > 0.52 + buffer) activeStringId = 'D';
+                }
+                else if (activeStringId === 'D') {
+                    if (wristY < 0.52 - buffer) activeStringId = 'A';
+                    else if (wristY > 0.68 + buffer) activeStringId = 'G';
+                }
+                else if (activeStringId === 'G') {
+                    if (wristY < 0.68 - buffer) activeStringId = 'D';
+                }
 
-                // Update angle indicator
-                angleMarker.style.top = `${(1 - smoothedBowAngle) * 180}px`;
+                // Safety catch
+                if (activeStringId === 'E' && wristY > 0.6) activeStringId = 'D';
+                if (activeStringId === 'G' && wristY < 0.4) activeStringId = 'A';
 
-                // Check if index finger is bent to trigger bowing
-                const isBowingTriggered = isFingerBent(leftHand, 8, 6);
+                violin.setString(activeStringId);
+                stringIndicator.innerText = `String: ${activeStringId}`;
+                stringIndicator.style.color = strings.find(s => s.id === activeStringId).color;
+            }
 
+            // Draw Strings Visual Overlay (Fixed Background)
+            const stringYPositions = [0.3, 0.45, 0.6, 0.75]; // Visual positions
+            strings.forEach((s, idx) => {
+                const yPos = stringYPositions[idx] * canvasElement.height;
+                canvasCtx.beginPath();
+                canvasCtx.moveTo(0, yPos);
+                canvasCtx.lineTo(canvasElement.width, yPos);
+
+                if (s.id === activeStringId) {
+                    canvasCtx.lineWidth = 4;
+                    canvasCtx.strokeStyle = s.color;
+                    canvasCtx.shadowBlur = 20;
+                    canvasCtx.shadowColor = s.color;
+                } else {
+                    canvasCtx.lineWidth = 1;
+                    canvasCtx.strokeStyle = "rgba(255,255,255,0.1)"; // Faint
+                    canvasCtx.shadowBlur = 0;
+                }
+                canvasCtx.stroke();
+                canvasCtx.shadowBlur = 0;
+
+                canvasCtx.fillStyle = "rgba(255,255,255,0.3)";
+                canvasCtx.font = "14px Arial";
+                canvasCtx.fillText(s.id, 20, yPos - 5);
+            });
+
+            // --- 5. Fretboard (Right Hand) ---
+            if (rightHand) {
+                drawConnectors(canvasCtx, rightHand, HAND_CONNECTIONS, { color: '#ffffff', lineWidth: 1 });
+
+                const fingersBent = [
+                    isFingerBent(rightHand, 8, 6),
+                    isFingerBent(rightHand, 12, 10),
+                    isFingerBent(rightHand, 16, 14),
+                    isFingerBent(rightHand, 20, 18)
+                ];
+
+                violin.updateFingers(fingersBent);
+
+                const tips = [8, 12, 16, 20];
+                tips.forEach((tipIdx, i) => {
+                    if (fingersBent[i]) {
+                        const pt = rightHand[tipIdx];
+                        canvasCtx.beginPath();
+                        canvasCtx.arc(pt.x * canvasElement.width, pt.y * canvasElement.height, 10, 0, 2 * Math.PI);
+                        canvasCtx.fillStyle = strings.find(s => s.id === activeStringId).color;
+                        canvasCtx.fill();
+                    }
+                });
+            } else {
+                violin.updateFingers([false, false, false, false]);
+            }
+
+            // --- 6. Bowing (Left Hand) ---
+            if (leftHand) {
                 const wrist = leftHand[0];
                 const currentX = wrist.x;
 
                 const wx = wrist.x * canvasElement.width;
                 const wy = wrist.y * canvasElement.height;
 
-                // Draw "Bow" with string color
-                const bowColor = stringColors[selectedString];
+                // Dynamic Bow Visual
                 canvasCtx.beginPath();
-                canvasCtx.moveTo(wx - 60, wy + 60);
-                canvasCtx.lineTo(wx + 220, wy - 60);
-                canvasCtx.lineWidth = isBowingTriggered ? 6 : 4;
-                canvasCtx.strokeStyle = isBowingTriggered ? bowColor : `${bowColor}66`;
-                canvasCtx.lineCap = 'round';
+                canvasCtx.moveTo(wx - 200, wy);
+                canvasCtx.lineTo(wx + 200, wy);
+                canvasCtx.strokeStyle = "rgba(255, 255, 255, 0.8)";
+                canvasCtx.lineWidth = 3;
                 canvasCtx.stroke();
 
-                // Draw string indicator near bow
-                canvasCtx.font = 'bold 24px Arial';
-                canvasCtx.fillStyle = bowColor;
-                canvasCtx.textAlign = 'center';
-                canvasCtx.fillText(selectedString + ' String', wx + 80, wy - 80);
+                // Draw Hand Skeleton (Bow Hand)
+                drawConnectors(canvasCtx, leftHand, HAND_CONNECTIONS, { color: strings.find(s => s.id === activeStringId).color, lineWidth: 2 });
 
-                if (previousLeftHandX !== null && deltaTime > 0) {
-                    let diff = Math.abs(currentX - previousLeftHandX);
+                if (previousBowX !== null) {
+                    let diff = Math.abs(currentX - previousBowX);
                     let speed = diff / deltaTime;
-
-                    // Gate speed by the trigger
-                    if (!isBowingTriggered) speed = 0;
-
                     if (speed < 0.05) speed = 0;
                     violin.bow(speed);
 
-                    // Visual feedback for bow pressure
                     if (speed > 0.1) {
                         canvasCtx.beginPath();
-                        canvasCtx.arc(wx, wy, 20 + (speed * 80), 0, 2 * Math.PI);
-                        canvasCtx.fillStyle = `${bowColor}${Math.floor(Math.min(speed * 255, 128)).toString(16).padStart(2, '0')}`;
+                        canvasCtx.arc(wx, wy, 15 + (speed * 50), 0, 2 * Math.PI);
+                        canvasCtx.fillStyle = `rgba(255,255,255,${Math.min(speed * 0.5, 0.4)})`;
                         canvasCtx.fill();
                     }
                 }
-                previousLeftHandX = currentX;
+                previousBowX = currentX;
             } else {
-                previousLeftHandX = null;
+                previousBowX = null;
                 violin.stop();
-            }
-
-            // FINGERING (RIGHT Hand)
-            if (rightHand) {
-                // Check which fingers are bent (for fingering positions)
-                const fingerStates = [
-                    isFingerBent(rightHand, 8, 6),   // Index -> 1st position
-                    isFingerBent(rightHand, 12, 10), // Middle -> 2nd position
-                    isFingerBent(rightHand, 16, 14), // Ring -> 3rd position
-                    isFingerBent(rightHand, 20, 18)  // Pinky -> 4th position (not used currently)
-                ];
-
-                // Send finger states to synth (it will pick the highest pressed finger)
-                const activeNote = violin.updateActiveNotes(fingerStates);
-
-                // Visual feedback for active fingers
-                const fingerTips = [8, 12, 16, 20];
-                const fingerNames = ['1st', '2nd', '3rd', '4th'];
-
-                fingerStates.forEach((isBent, index) => {
-                    if (isBent) {
-                        const tip = rightHand[fingerTips[index]];
-                        const x = tip.x * canvasElement.width;
-                        const y = tip.y * canvasElement.height;
-
-                        // Determine if this is the active (highest) finger
-                        let highestBent = -1;
-                        fingerStates.forEach((b, i) => { if (b) highestBent = i; });
-                        const isActive = index === highestBent;
-
-                        canvasCtx.beginPath();
-                        canvasCtx.arc(x, y, isActive ? 18 : 12, 0, 2 * Math.PI);
-                        canvasCtx.fillStyle = isActive ?
-                            "rgba(255, 215, 0, 0.9)" : // Gold for active
-                            "rgba(255, 255, 255, 0.4)"; // Dim for pressed but not active
-                        canvasCtx.fill();
-
-                        if (isActive) {
-                            canvasCtx.strokeStyle = "white";
-                            canvasCtx.lineWidth = 3;
-                            canvasCtx.stroke();
-
-                            // Label the position
-                            canvasCtx.font = 'bold 14px Arial';
-                            canvasCtx.fillStyle = 'white';
-                            canvasCtx.textAlign = 'center';
-                            canvasCtx.fillText(fingerNames[index], x, y - 25);
-                        }
-                    }
-                });
             }
 
             canvasCtx.restore();
