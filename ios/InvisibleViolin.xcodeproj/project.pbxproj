@@ -1,0 +1,297 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		000000000000000000000016 /* MediaPipeTasksVision in Frameworks */ = {isa = PBXBuildFile; productRef = 000000000000000000000015 /* MediaPipeTasksVision */; };
+		0000000000000000000000C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000064 /* AppDelegate.swift */; };
+		0000000000000000000000C9 /* GestureInstrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000065 /* GestureInstrument.swift */; };
+		0000000000000000000000CA /* CameraTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000066 /* CameraTracker.swift */; };
+		0000000000000000000000CB /* ViolinAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000067 /* ViolinAudio.swift */; };
+		0000000000000000000000CC /* ViolinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000068 /* ViolinViewController.swift */; };
+		0000000000000000000000CD /* ViolinDSP.c in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000069 /* ViolinDSP.c */; };
+		0000000000000000000000D1 /* Resources/hand_landmarker.task in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000006D /* Resources/hand_landmarker.task */; };
+		000000000000000000001302 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000302; };
+		000000000000000000001303 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000303; };
+A20000000000000000000002 = {isa = PBXBuildFile; fileRef = A20000000000000000000001; };
+A20000000000000000000004 = {isa = PBXBuildFile; fileRef = A20000000000000000000003; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		000000000000000000000006 /* InvisibleViolin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvisibleViolin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		000000000000000000000064 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		000000000000000000000065 /* GestureInstrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureInstrument.swift; sourceTree = "<group>"; };
+		000000000000000000000066 /* CameraTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraTracker.swift; sourceTree = "<group>"; };
+		000000000000000000000067 /* ViolinAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViolinAudio.swift; sourceTree = "<group>"; };
+		000000000000000000000068 /* ViolinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViolinViewController.swift; sourceTree = "<group>"; };
+		000000000000000000000069 /* ViolinDSP.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ViolinDSP.c; sourceTree = "<group>"; };
+		00000000000000000000006A /* ViolinDSP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViolinDSP.h; sourceTree = "<group>"; };
+		00000000000000000000006B /* InvisibleViolin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InvisibleViolin-Bridging-Header.h"; sourceTree = "<group>"; };
+		00000000000000000000006C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00000000000000000000006D /* Resources/hand_landmarker.task */ = {isa = PBXFileReference; lastKnownFileType = file; path = Resources/hand_landmarker.task; sourceTree = "<group>"; };
+		000000000000000000000302 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		000000000000000000000303 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+A20000000000000000000001 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+A20000000000000000000003 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenViolinViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		000000000000000000000008 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000000000016 /* MediaPipeTasksVision in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		000000000000000000000002 = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000003 /* InvisibleViolin */,
+				000000000000000000000004 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		000000000000000000000003 /* InvisibleViolin */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000064 /* AppDelegate.swift */,
+A20000000000000000000003,
+A20000000000000000000001,
+				000000000000000000000303 /* PrivacyInfo.xcprivacy */,
+				000000000000000000000302 /* Assets.xcassets */,
+				000000000000000000000065 /* GestureInstrument.swift */,
+				000000000000000000000066 /* CameraTracker.swift */,
+				000000000000000000000067 /* ViolinAudio.swift */,
+				000000000000000000000068 /* ViolinViewController.swift */,
+				000000000000000000000069 /* ViolinDSP.c */,
+				00000000000000000000006A /* ViolinDSP.h */,
+				00000000000000000000006B /* InvisibleViolin-Bridging-Header.h */,
+				00000000000000000000006C /* Info.plist */,
+				00000000000000000000006D /* Resources/hand_landmarker.task */,
+			);
+			path = InvisibleViolin;
+			sourceTree = "<group>";
+		};
+		000000000000000000000004 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000006 /* InvisibleViolin.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		000000000000000000000005 /* InvisibleViolin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00000000000000000000000B /* Build configuration list for PBXNativeTarget "InvisibleViolin" */;
+			buildPhases = (
+				000000000000000000000007 /* Sources */,
+				000000000000000000000008 /* Frameworks */,
+				000000000000000000000009 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InvisibleViolin;
+			packageProductDependencies = (
+				000000000000000000000015 /* MediaPipeTasksVision */,
+			);
+			productName = InvisibleViolin;
+			productReference = 000000000000000000000006 /* InvisibleViolin.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		000000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 2600;
+			};
+			buildConfigurationList = 00000000000000000000000A /* Build configuration list for PBXProject "InvisibleViolin" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 000000000000000000000002;
+			packageReferences = (
+				000000000000000000000014 /* XCRemoteSwiftPackageReference "mediapipe" */,
+			);
+			productRefGroup = 000000000000000000000004 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				000000000000000000000005 /* InvisibleViolin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		000000000000000000000009 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0000000000000000000000D1 /* Resources/hand_landmarker.task in Resources */,
+				000000000000000000001303 /* PrivacyInfo.xcprivacy in Resources */,
+				000000000000000000001302 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		000000000000000000000007 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0000000000000000000000C8 /* AppDelegate.swift in Sources */,
+A20000000000000000000004,
+A20000000000000000000002,
+				0000000000000000000000C9 /* GestureInstrument.swift in Sources */,
+				0000000000000000000000CA /* CameraTracker.swift in Sources */,
+				0000000000000000000000CB /* ViolinAudio.swift in Sources */,
+				0000000000000000000000CC /* ViolinViewController.swift in Sources */,
+				0000000000000000000000CD /* ViolinDSP.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		00000000000000000000000C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+                ENABLE_TESTABILITY = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		00000000000000000000000D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		00000000000000000000000E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6CU4Y8R9T9;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = InvisibleViolin/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.newlegna.InvisibleViolin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "InvisibleViolin/InvisibleViolin-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		00000000000000000000000F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6CU4Y8R9T9;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = InvisibleViolin/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.newlegna.InvisibleViolin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "InvisibleViolin/InvisibleViolin-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00000000000000000000000A /* Build configuration list for PBXProject "InvisibleViolin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00000000000000000000000C /* Debug */,
+				00000000000000000000000D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		00000000000000000000000B /* Build configuration list for PBXNativeTarget "InvisibleViolin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00000000000000000000000E /* Debug */,
+				00000000000000000000000F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		000000000000000000000014 /* XCRemoteSwiftPackageReference "mediapipe" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google-ai-edge/mediapipe";
+			requirement = {
+				kind = revision;
+				revision = fac6a4fba2ae2371e94caecfbb14dbcc25a420e8;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		000000000000000000000015 /* MediaPipeTasksVision */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 000000000000000000000014 /* XCRemoteSwiftPackageReference "mediapipe" */;
+			productName = MediaPipeTasksVision;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+	};
+	rootObject = 000000000000000000000001 /* Project object */;
+}
